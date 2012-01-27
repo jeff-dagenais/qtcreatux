@@ -1,0 +1,22 @@
+#!/bin/bash
+
+KERN_DIR=$(pwd)
+
+for subdir in $(ls $KERN_DIR/drivers); do
+	export subdir=$KERN_DIR/drivers/$subdir
+	if [ -d $subdir ] ; then
+		cd $subdir
+		echo qmake in $(pwd)
+		qmake -project
+	fi
+done
+
+cd $KERN_DIR/drivers/staging/iio && qmake -project
+cd $KERN_DIR/arch/x86 && qmake -project
+cd $KERN_DIR/include && qmake -project
+cd $KERN_DIR/kernel && qmake -project
+#cd $KERN_DIR/fs && qmake -project
+cd $KERN_DIR/fs/sysfs && qmake -project
+cd $KERN_DIR/mm && qmake -project
+cd $KERN_DIR/lib && qmake -project
+

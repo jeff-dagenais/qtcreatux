@@ -1,0 +1,11 @@
+kconfig2qmk
+-----------
+
+cd kconfig2qmk
+qmake
+make
+make install INSTALL_ROOT=/usr/local/bin 
+(this /usr/local/bin is the default)
+
+usage:
+TBD
