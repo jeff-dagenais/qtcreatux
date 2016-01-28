@@ -8,21 +8,25 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    QFileInfo info("./include/generated/autoconf.h");
-    qDebug() << "opening:" << info.canonicalFilePath();
-    QFile autoconf("./include/generated/autoconf.h");
-    if(!autoconf.open(QIODevice::ReadOnly))
-    {
+    QFileInfo srcFileInfo("./include/generated/autoconf.h");
+    QFile qmkFile("./autoconf.qmk");
+
+    qDebug() << "generating" << qmkFile.fileName();
+    qDebug() << "from" << srcFileInfo.canonicalFilePath();
+
+    QFile autoconf(srcFileInfo.canonicalFilePath());
+
+    if (!autoconf.open(QIODevice::ReadOnly)) {
        qDebug() << "could not open" << autoconf.fileName();
        return 1;
     }
+
     QString qmk("DEFINES += \\\n");
     //qDebug() << QString(autoconf.readAll());
     //qDebug() << QString(autoconf.readAll());
 
 
-    foreach(QString line, QString(autoconf.readAll()).split('\n'))
-    {
+    foreach (QString line, QString(autoconf.readAll()).split('\n')) {
        if(!line.startsWith("#define"))
           continue;
        QStringList lineItems = line.split(' ');
@@ -38,10 +42,8 @@ int main(int argc, char *argv[])
     }
     qmk += "\n";
 
-    QFile qmkFile("autoconf.qmk");
-    if(!qmkFile.open(QIODevice::WriteOnly))
-    {
-       qDebug() << "could not create" << qmkFile.fileName();
+    if (!qmkFile.open(QIODevice::WriteOnly)) {
+       qDebug() << "could not create" << qmkFile.fileName() << qmkFile.errorString();
        return 3;
     }
 
