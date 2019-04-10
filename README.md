@@ -16,21 +16,14 @@ By default, will install the exe to /usr/local/bin)
 # Usage
 
 1. create a directory where you'll build the kernel
-1. copy over an existing `.config` or
-..1. create a new one using `make O=/build/directory/you/created ARCH=?? defconfig` (or `menuconfig` or whatever you prefer)
-1. make `make O=/build/directory/you/created ARCH=?? prepare`
-1. `cd build/directory/you/created`
-1. `kconfig2qmk`
-1. `genlinuxpro`
+1. copy over an existing `.config` or create a new one using `make O=/build/directory/you/created ARCH=?? defconfig` (or `menuconfig` or whatever you prefer)
+1. The kernel's prepare step will generate the input files kconfig2qmk needs. (make `make O=/build/directory/you/created ARCH=?? prepare`)
+1. `genlinuxpro build/directory/you/created` (the .pro file will be one dir up, i.e. `build/directory/you' in this example)
 
-`genlinux` will generate a file named after the top-level directory it's in. This .pro can be opened by qt-creator for browsing and editing.
+This .pro can be opened by qt-creator for browsing and editing.
 
-I personnaly replace the qmake-make build steps with kernel specific build and deploy steps. Making the integration more seamless.
+You can hack qt-creator's build steps to do whatever you want (`bitbake virtual/linux -c kernel_modules -c deploy` or `make` in the build dir). You can even use the "deploy" steps to do whatever you need. This configuration all goes in the *.pro.user file next to the .pro.
 
-# C-only support in qt-creator
-
-I have a working ugly patch on top of qt-creator 3.2 which removes C++ keywords support from the syntax parser. This is necessary since the linux source code uses C++ keywords such as "new" and "class" as regular variables.
-
-If not disabled, these will partially break the browsing and auto-completion behaviour.
+The generate .pro file contains DEFINES which allow qt-creator's c++ parser to tolerate certain keywords (like 'new') without breaking the nice indexing.
 
 
