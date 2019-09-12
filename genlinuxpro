@@ -63,7 +63,7 @@ cat <<EOF > $PRO
 # $(date)
 
 include(./autoconf.qmk)
-INCLUDEPATH += $builddir/include $builddir/include/uapi $builddir/source/include
+INCLUDEPATH += $builddir/include $builddir/include/uapi $builddir/source/include $builddir/source/arch/arm64/include
 DEFINES += DEBUG __KERNEL__ \
 class=klass new=New private=Private protected=Protected \
 IS_ENABLED(x)=x \
