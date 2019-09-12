@@ -79,7 +79,7 @@ MODULE \
 EOF
 
 echo "SOURCES += \\" >> $PRO
-find $SRC_DIRS ${PRUNES[*]} \( -type f -name '*.c' -not -name '*.mod.c' \) -printf '%p \\\n' >> $PRO
+find $SRC_DIRS ${PRUNES[*]} \( \( -type f -name '*.c' -not -name '*.mod.c' \) -o -iname '*.s' \) -printf '%p \\\n' >> $PRO
 echo >> $PRO
 echo "HEADERS += \\" >> $PRO
 find $SRC_DIRS ${PRUNES[*]} \( -type f -name '*.h' \) -printf '%p \\\n' >> $PRO
