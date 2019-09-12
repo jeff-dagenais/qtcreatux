@@ -69,9 +69,12 @@ include(./autoconf.qmk)
 INCLUDEPATH += $builddir/include $builddir/include/uapi $builddir/source/include $builddir/source/arch/arm64/include
 DEFINES += DEBUG __KERNEL__ \
 class=klass new=New private=Private protected=Protected \
-IS_ENABLED(x)=x \
+IS_ENABLED(x)=defined(x) \
+IS_REACHABLE(x)=defined(x) \
+IS_MODULE(x)=0 \
 __user= __must_check= \
 EXPORT_SYMBOL_GPL(x)= \
+MODULE \
 
 EOF
 
