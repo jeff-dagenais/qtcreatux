@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+set -e
+
 builddir="$1"
 
 if [ -z "$builddir" ]
