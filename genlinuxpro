@@ -33,6 +33,7 @@ SRC_DIRS=" \
 $builddir/arch \
 $builddir/drivers \
 $SRC_DIR/arch/arm64 \
+$SRC_DIR/block \
 $SRC_DIR/kernel \
 $SRC_DIR/fs \
 $SRC_DIR/include \
